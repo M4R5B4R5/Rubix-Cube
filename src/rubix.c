@@ -35,9 +35,6 @@ Cube *rubix_get_cube(Rubix *rubix, vec3 local) {
     return NULL;
 }
 
-// TODO:
-// - Fix dumb normalization stuff: local = -3 -> back but local 2 = front? 
-
 Plane rubix_plane(Rubix *rubix, ptype type, int local) {
     Plane plane;
     glm_ivec3_copy(type, plane.type);
