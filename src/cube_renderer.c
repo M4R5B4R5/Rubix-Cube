@@ -69,7 +69,7 @@ static unsigned int cube_indices[] = {
 
 CubeRenderer *cube_renderer_create() {
     CubeRenderer *renderer = malloc(sizeof(struct cube_renderer));
-    Shader *shader = shader_create("shader.vert", "shader.frag");
+    Shader *shader = shader_create("glsl/shader.vert", "glsl/shader.frag");
     renderer->shader = shader;
 
     glGenVertexArrays(1, &renderer->va);
