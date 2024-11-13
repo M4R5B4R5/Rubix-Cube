@@ -1,0 +1,4 @@
+#!/bin/dash
+
+make -B
+./main

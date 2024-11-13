@@ -1,0 +1,4 @@
+#!/bin/dash
+
+make -B
+valgrind --leak-check=full --suppressions=valgrind_suppressions.supp ./main

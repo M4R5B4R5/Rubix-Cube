@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "shader.h": "c",
+        "camera.h": "c",
+        "cglm.h": "c",
+        "glad.h": "c"
+    }
+}
