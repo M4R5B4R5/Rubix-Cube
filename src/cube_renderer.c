@@ -123,6 +123,5 @@ void cube_renderer_draw(CubeRenderer *renderer, Cube *cube) {
     
     shader_setUniformMat4(renderer->shader, final, "model");
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawElements(GL_TRIANGLES, sizeof(cube_indices), GL_UNSIGNED_INT, NULL);
 }

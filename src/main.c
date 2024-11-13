@@ -8,8 +8,6 @@
 #include "cube.h"
 #include "rubix.h"
 
-#define MAX_CUBES 100
-
 GLFWwindow *window;
 Camera *camera;
 CubeRenderer *renderer;
@@ -19,6 +17,8 @@ Rubix *rubix;
 ptype plane_mode;
 int direction = CLOCKWISE;
 
+int wire_frame = 0;
+
 void framebuffer_resize(GLFWwindow *window, int width, int height) {
     glViewport(0, 0, width, height);
 }
@@ -26,6 +26,16 @@ void framebuffer_resize(GLFWwindow *window, int width, int height) {
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     // Check if the key was pressed
     if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_W) {
+            if (wire_frame == 0) {
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                wire_frame = 1;
+            } else {
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+                wire_frame = 0;
+            }
+        }
+
         if (key == GLFW_KEY_X) {
             glm_ivec3_copy(YZ_PLANE, plane_mode);
         } else if (key == GLFW_KEY_Y) {
@@ -35,13 +45,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
 
         // Check if the key is a number key (from '0' to '9')
-        if (key >= GLFW_KEY_0 && key <= GLFW_KEY_3) {
+        if (key >= GLFW_KEY_1 && key <= GLFW_KEY_3) {
             int local = (key - GLFW_KEY_0);
             if (RUBIX_SIZE % 2 == 0 && local > 0) {
                 local += 1;
             }
             local -= (RUBIX_SIZE / 2) + 1;
-            // printf("%d", local);
             rubix_twist(rubix, plane_mode, local, direction);
         }
 
@@ -91,9 +100,9 @@ int main() {
         camera_updateProjectionMatrix(camera, renderer->shader, 800.0f/600.0f);
 
         // rotate_plane(plane, CLOCKWISE);
+        rubix_render(rubix, renderer);  
         rubix_rotate(rubix);
 
-        rubix_render(rubix, renderer);  
 
         glfwPollEvents();
         glfwSwapBuffers(window);

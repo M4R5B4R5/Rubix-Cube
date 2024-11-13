@@ -2,9 +2,9 @@
 
 void even_offset(vec3 position) {
     if (RUBIX_SIZE % 2 == 0) {
-        position[0] = position[0] + 0.5f * CUBE_SIZE;
-        position[1] = position[1] + 0.5f * CUBE_SIZE;
-        position[2] = position[2] + 0.5f * CUBE_SIZE;
+        position[0] = position[0] + 0.5f;
+        position[1] = position[1] + 0.5f;
+        position[2] = position[2] + 0.5f;
     }
 }
 
@@ -72,6 +72,7 @@ Plane rubix_plane(Rubix *rubix, ptype type, int local) {
     for (int i = 0; i < N_CUBES; i++) {
         Cube *c = rubix->cubes.arr[i];
         
+        // Just in-case float loses too much precision
         float epsilon = 0.01f;
         if (fabs(c->position[v_component] - final_position[v_component]) < epsilon) {
             plane.cubes.arr[ptr] = c;
