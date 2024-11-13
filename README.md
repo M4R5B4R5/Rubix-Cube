@@ -7,7 +7,7 @@ A simple interactive 3D rubix cube program.
 ### For Debian/Ubuntu based distributions, simply run the following command in the root directory
 
 ```
-build
+./build
 ```
 
 This will automatically build and run the program.
